@@ -2847,9 +2847,19 @@ long long fib(long long n) {
 | `log2(x)` | $\log_2(x)$ | `log2(8)` → `3.0` |
 | `log10(x)` | $\log_{10}(x)$ | `log10(1000)` → `3.0` |
 | `fmod(x, y)` | Float modulo | `fmod(5.5, 2.0)` → `1.5` |
-| `__gcd(a, b)` | GCD (C++14) | `__gcd(12, 8)` → `4` |
-| `gcd(a, b)` | GCD (C++17 `<numeric>`) | `gcd(12, 8)` → `4` |
-| `lcm(a, b)` | LCM (C++17 `<numeric>`) | `lcm(4, 6)` → `12` |
+| `__gcd(a, b)` | EBOB – En Büyük Ortak Bölen (GCC dahili, C++14+). Eski judge'larda kullan. | `__gcd(12, 8)` → `4` |
+| `gcd(a, b)` | EBOB – Standart C++17 (`<numeric>`). **Bunu tercih et.** | `gcd(12, 8)` → `4` |
+| `lcm(a, b)` | EKOK – En Küçük Ortak Kat. C++17 (`<numeric>`). | `lcm(4, 6)` → `12` |
+
+> **EBOB (GCD) nedir?** İki sayıyı da bölen en büyük sayı.
+> `gcd(12, 8)` → 12'nin bölenleri: {1,2,3,**4**,6,12}, 8'in bölenleri: {1,2,**4**,8} → ortak en büyük = **4**
+>
+> **EKOK (LCM) nedir?** İki sayının da katı olan en küçük sayı.
+> `lcm(4, 6)` → 4'ün katları: 4,8,**12**,16... / 6'nın katları: 6,**12**,18... → ortak en küçük = **12**
+>
+> **Formül:** $\text{lcm}(a,b) = \frac{a \times b}{\gcd(a,b)}$
+>
+> **`__gcd` vs `gcd` farkı:** İkisi de aynı işi yapar. `__gcd` GCC derleyicisine özel (çift alt çizgi = dahili fonksiyon), `gcd` ise C++17 standardı. Yarışmada C++17 açıksa `gcd`/`lcm` kullan, yoksa `__gcd` kullan.
 
 ### 22.2 Bit Manipulation Fonksiyonları (GCC Builtin)
 
